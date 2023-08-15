@@ -1,0 +1,31 @@
+{{define "HealthApi"}}
+
+{{$host := .host}}
+{{$timeout := .timeout}}
+{{$rateLimitRouter := .rateLimitRouter}}
+{{$backendRateLimit := .backendRateLimit}}
+
+{
+  "endpoint": "/health",
+  "method": "GET",
+  "input_headers": ["Content-Type", "Content-Length"],
+  "input_query_strings": [],
+  "timeout": "{{ $timeout }}",
+  "output_encoding": "no-op",
+  "backend": [
+    {
+      "method": "GET",
+      "url_pattern": "/health",
+      "host": ["{{ $host }}"],
+      "encoding": "json",
+      "extra_config": {
+        {{ template "BackendRateLimit" .backendRateLimit }}
+      }
+    }
+  ],
+  "extra_config": {
+    {{ template "RouterRateLimit" .routerRateLimit }}
+  }
+},
+
+{{end}}
