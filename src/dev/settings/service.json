@@ -1,0 +1,15 @@
+{
+  "port": 8080,
+  "timeout": "50000ms",
+  "cacheTtl": "0s",
+  "loggingLevel": "INFO",
+  "host": "http://localhost:3000",
+  "backendRateLimit": {
+    "maxRate": 100,
+    "capacity": 100
+  },
+  "routerRateLimit": {
+    "maxRate": 100,
+    "clientMaxRate": 100
+  }
+}
